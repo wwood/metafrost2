@@ -34,7 +34,7 @@ impl Metafrost{
         };
         let mut colour_vec: Vec<String> = Vec::new();
         let mut i = 0;
-        while i <= self.position.len()-2 {
+        while i < self.position.len()-1 {
             if self.position[i] == self.position[i + 1] {
                 colour_vec.push(self.colour[i].clone());
             } else {
@@ -44,6 +44,15 @@ impl Metafrost{
                 colour_vec = Vec::new();
             }
             i += 1
+        }
+        if self.position[i]==self.position[i-1] {
+            colour_vec.push(self.colour[i].clone());
+            let mut kmer_count = combinations.combos.entry(colour_vec.join(",")).or_insert(0);
+            *kmer_count += 1;
+        }else{
+            colour_vec.push(self.colour[i].clone());
+            let mut kmer_count = combinations.combos.entry(colour_vec.join(",")).or_insert(0);
+            *kmer_count += 1;
         }
         return combinations;
     }
