@@ -1,12 +1,10 @@
-use std;
 use std::collections::HashMap;
-use std::collections::hash_map::Entry;
-use std::str;
 
 pub struct Combinations{
     pub combos: HashMap<String, i32>
 }
 
+#[derive(Clone)]
 pub struct Metafrost{
     read: Vec<String>,
     position: Vec<String>,
@@ -28,10 +26,8 @@ impl Metafrost{
         self.colour.push(colour);
     }
 
-    pub fn establish_cof(&mut self) -> Combinations {
-        let mut combinations = Combinations{
-            combos: HashMap::new(),
-        };
+    pub fn establish_cof(self, mut combinations: Combinations) -> Combinations {
+//        let mut combinations = combinations;
         let mut colour_vec: Vec<String> = Vec::new();
         let mut i = 0;
         while i < self.position.len()-1 {
@@ -39,7 +35,7 @@ impl Metafrost{
                 colour_vec.push(self.colour[i].clone());
             } else {
                 colour_vec.push(self.colour[i].clone());
-                let mut kmer_count = combinations.combos.entry(colour_vec.join(",")).or_insert(0);
+                let kmer_count = combinations.combos.entry(colour_vec.join(",")).or_insert(0);
                 *kmer_count += 1;
                 colour_vec = Vec::new();
             }
@@ -47,11 +43,11 @@ impl Metafrost{
         }
         if self.position[i]==self.position[i-1] {
             colour_vec.push(self.colour[i].clone());
-            let mut kmer_count = combinations.combos.entry(colour_vec.join(",")).or_insert(0);
+            let kmer_count = combinations.combos.entry(colour_vec.join(",")).or_insert(0);
             *kmer_count += 1;
         }else{
             colour_vec.push(self.colour[i].clone());
-            let mut kmer_count = combinations.combos.entry(colour_vec.join(",")).or_insert(0);
+            let kmer_count = combinations.combos.entry(colour_vec.join(",")).or_insert(0);
             *kmer_count += 1;
         }
         return combinations;
