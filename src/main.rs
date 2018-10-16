@@ -1,5 +1,4 @@
 extern crate metafrost2;
-pub mod get_occurences;
 extern crate clap;
 use clap::*;
 
@@ -15,11 +14,7 @@ fn main() {
         Some("COF") => {
             let m = matches.subcommand_matches("COF").unwrap();
             let metafrost_file: &str = m.value_of("metafrost-file").unwrap();
-            let mut cof = metafrost2::read_metafrost(&metafrost_file);
-//            let mut cof = metafrost.establish_cof();
-            for (key, value) in cof.combos.iter(){
-                println!("{} \t {}", key, value);
-            }
+            metafrost2::read_metafrost(&metafrost_file);
         }
         _ => {
             app.print_help().unwrap();

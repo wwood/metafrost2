@@ -2,6 +2,8 @@
 name = "metafrost2"
 version = "0.1.0"
 authors = ["Rhys Newell <rhys.newell@uqconnect.edu.au>"]
-edition = "2018"
 
 [dependencies]
+log = "^0.4.5"
+env_logger = "^0.5.13"
+clap = "^2.32.0"
