@@ -7,3 +7,6 @@ authors = ["Rhys Newell <rhys.newell@uqconnect.edu.au>"]
 log = "^0.4.5"
 env_logger = "^0.5.13"
 clap = "^2.32.0"
+
+[dev-dependencies]
+assert_cli = "0.6.*"
