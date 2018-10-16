@@ -19,7 +19,6 @@ pub fn read_metafrost(metafrost_file_path: &str) {
 
     let process_kmer = |colours: &mut Vec<String>,
             combinations: &mut std::collections::HashMap<String, u32>| {
-                colours.sort();
                 let key = colours.join(",").to_string();
                 debug!("key: {}", key);
                 let count = combinations.entry(key).or_insert(0);
